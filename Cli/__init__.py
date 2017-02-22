@@ -1,6 +1,7 @@
 import os
 import re
 import readline
+import subprocess
 
 class Command(object):
 
