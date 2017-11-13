@@ -27,12 +27,12 @@ class Interface(object):
     UNDERLINE = '\033[4m'
 
     # good
-    OKBLUE = '\033[96m'
-    OKGREEN = '\033[92m'
+    INFO = '\033[96m'
+    OK = '\033[92m'
 
     # not so good
     WARNING = '\033[93m'
-    FAIL = '\033[91m'
+    ERROR = '\033[91m'
 
     # closing character
     ENDC = '\033[0m'
@@ -43,7 +43,7 @@ class Interface(object):
 
     def error(self, msg: str):
         # some cli colors
-        self.writeOut(self.FAIL + "Error: " + self.ENDC)
+        self.writeOut(self.ERROR + "Error: " + self.ENDC)
         return self.writeOut(msg)
 
     def warning(self, msg: str):
@@ -56,11 +56,11 @@ class Interface(object):
 
     def info(self, msg: str):
         # some cli colors
-        return self.writeOut(self.OKBLUE + msg + self.ENDC)
+        return self.writeOut(self.INFO + msg + self.ENDC)
 
     def ok(self, msg: str):
         # some cli colors
-        return self.writeOut(self.OKGREEN + msg + self.ENDC)
+        return self.writeOut(self.OK + msg + self.ENDC)
 
     def askFor(self, prompt: str, options=False, default: str=False):
         self.info(prompt)
