@@ -1,10 +1,11 @@
 import os
 import re
 import readline
+import subprocess
 
 class Command(object):
 
-    def execute(self, command):
+    def execute(self, command: str, codeOk: int = 0):
         process = subprocess.Popen(
             command,
             shell=True,
@@ -13,7 +14,7 @@ class Command(object):
             stderr=subprocess.PIPE
         )
         output, err = process.communicate()
-        if process.returncode != 0:
+        if process.returncode != codeOk:
             return False
 
         return output.decode("utf-8").strip()
