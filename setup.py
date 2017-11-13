@@ -13,7 +13,7 @@ def version(fpath):
 
 setup(
     name='simplecli',
-    version='0.0.1',
+    version=version('version.txt'),
     description='Helper for Python CLI Scripts',
     author='Claudio Walser',
     author_email='claudio.walser@srf.ch',
