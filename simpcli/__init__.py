@@ -52,7 +52,7 @@ class Interface(object):
 
     def header(self, msg: str):
         # some cli colors
-        return self.writeOut(self.HEADER + msg + self.ENDC)
+        return self.writeOut(self.BOLD + self.HEADER + msg + self.ENDC)
 
     def info(self, msg: str):
         # some cli colors
