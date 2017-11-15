@@ -5,7 +5,7 @@ import subprocess
 
 class Command(object):
 
-    def execute(self, command: str, codeOk: int = 0):
+    def execute(self, command: str, ignoreReturnCode: bool = False):
         process = subprocess.Popen(
             command,
             shell=True,
@@ -14,7 +14,7 @@ class Command(object):
             stderr=subprocess.PIPE
         )
         output, err = process.communicate()
-        if process.returncode != codeOk:
+        if process.returncode != 0 and ignoreReturnCode == True:
             return False
 
         return output.decode("utf-8").strip()
