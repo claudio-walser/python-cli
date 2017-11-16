@@ -3,36 +3,6 @@ import re
 import readline
 import subprocess
 
-from simpcli import Interface
-
-class Command(object):
-
-    verbose = False
-    interface = Interface()
-
-    def __init__(self, verbose: bool = False):
-        self.verbose = verbose
-
-    def execute(self, command: str, ignoreReturnCode: bool = False):
-        if self.verbose is True:
-            self.interface.warning("Executing: %s" % command)
-
-        process = subprocess.Popen(
-            command,
-            shell=True,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-        output, err = process.communicate()
-        if process.returncode != 0 and ignoreReturnCode == True:
-            return False
-
-        output = output.decode("utf-8").strip()
-        if self.verbose is True:
-            self.interface.writeOut(output)
-
-        return output
 
 class Interface(object):
 
@@ -161,3 +131,33 @@ class InputCompleter(object):
             return [cmd + ' '][state]
         results = [c + ' ' for c in self.options if c.startswith(cmd)] + [None]
         return results[state]
+
+
+class Command(object):
+
+    verbose = False
+    interface = Interface()
+
+    def __init__(self, verbose: bool = False):
+        self.verbose = verbose
+
+    def execute(self, command: str, ignoreReturnCode: bool = False):
+        if self.verbose is True:
+            self.interface.warning("Executing: %s" % command)
+
+        process = subprocess.Popen(
+            command,
+            shell=True,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        output, err = process.communicate()
+        if process.returncode != 0 and ignoreReturnCode == True:
+            return False
+
+        output = output.decode("utf-8").strip()
+        if self.verbose is True:
+            self.interface.writeOut(output)
+
+        return output
