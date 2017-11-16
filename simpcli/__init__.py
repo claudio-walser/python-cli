@@ -5,7 +5,16 @@ import subprocess
 
 class Command(object):
 
+    verbose = False
+    interface = Interface()
+
+    def __init__(self, verbose: bool = False):
+        self.verbose = verbose
+
     def execute(self, command: str, ignoreReturnCode: bool = False):
+        if self.verbose is True:
+            self.interface.warning("Executing: %s" % command)
+
         process = subprocess.Popen(
             command,
             shell=True,
@@ -17,7 +26,11 @@ class Command(object):
         if process.returncode != 0 and ignoreReturnCode == True:
             return False
 
-        return output.decode("utf-8").strip()
+        output = output.decode("utf-8").strip()
+        if self.verbose is True:
+            self.interface.writeOut(output)
+
+        return output
 
 class Interface(object):
 
