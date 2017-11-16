@@ -3,6 +3,8 @@ import re
 import readline
 import subprocess
 
+from simpcli import Interface
+
 class Command(object):
 
     verbose = False
