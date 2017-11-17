@@ -3,6 +3,8 @@ import re
 import readline
 import subprocess
 
+class CliException(Exception):
+    pass
 
 class Interface(object):
 
@@ -155,7 +157,7 @@ class Command(object):
         output, err = process.communicate()
         if process.returncode != 0 and ignoreReturnCode == False:
             if self.verbose is True:
-                self.interface.error(err.decode("utf-8").strip())            
+                raise CliException(err.decode("utf-8").strip())            
             return False
 
         output = output.decode("utf-8").strip()
