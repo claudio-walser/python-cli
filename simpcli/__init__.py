@@ -153,7 +153,9 @@ class Command(object):
             stderr=subprocess.PIPE
         )
         output, err = process.communicate()
-        if process.returncode != 0 and ignoreReturnCode == True:
+        if process.returncode != 0 and ignoreReturnCode == False:
+            if self.verbose is True:
+                self.interface.error(err)            
             return False
 
         output = output.decode("utf-8").strip()
