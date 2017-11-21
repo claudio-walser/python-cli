@@ -45,6 +45,9 @@ class Interface(object):
         # some cli colors
         return self.writeOut(self.INFO + msg + self.ENDC)
 
+    def red(self, msg: str):
+        return self.writeOut(self.ERROR + msg + self.ENDC)
+
     def ok(self, msg: str):
         # some cli colors
         return self.writeOut(self.OK + msg + self.ENDC)
