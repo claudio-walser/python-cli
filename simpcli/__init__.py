@@ -25,8 +25,11 @@ class Interface(object):
     ENDC = '\033[0m'
 
     def writeOut(self, msg: str):
-        print(msg)
+        print(" ".join(msg.split()))
         return True
+
+    def bold(self, msg: str):
+        self.writeOut(self.BOLD + msg + self.ENDC)
 
     def error(self, msg: str):
         # some cli colors
